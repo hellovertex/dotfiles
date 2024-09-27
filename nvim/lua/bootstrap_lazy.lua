@@ -43,6 +43,39 @@ require("lazy").setup({
         require("nvim-treesitter.configs").setup(opts)
       end,
     },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+           local lspconfig = require('lspconfig')
+        end
+    },
+--     {
+--         "neovim/nvim-lspconfig",
+-- 		settings = {
+--             Lua = {
+--             runtime = {
+--                 -- Tell the language server which version of Lua you're using (most likely LuaJIT for Neovim)
+--                 version = 'LuaJIT',
+--                 -- Setup your lua path
+--                 path = vim.split(package.path, ';'),
+--             },
+--             diagnostics = {
+--                 -- Get the language server to recognize the `vim` global
+--                 globals = {'vim'},
+--             },
+--             workspace = {
+--                 -- Make the server aware of Neovim runtime files
+--                 library = vim.api.nvim_get_runtime_file("", true),
+--                 checkThirdParty = false,  -- Disable third party checks
+--             },
+--             telemetry = {
+--                 enable = false,  -- Disable telemetry data collection by the Lua language server
+--             },
+--         },
+--     },
+-- 
+--         
+--     },
     -- neorg plugin --  2024-09-25 -- Added as potential backend for calendar frontend
     {
       "nvim-neorg/neorg",
