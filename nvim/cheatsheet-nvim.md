@@ -19,6 +19,7 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 - [x] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
 - [x] Bind CTRL+B to GoTo Defintion (via LSP)
 - [x] Add Linter for Lua
+- [ ] Set up autocompletion for Lua
 
 `[ ]` QoL:
 - [ ] Remap CTRL+W + '+' to '+'

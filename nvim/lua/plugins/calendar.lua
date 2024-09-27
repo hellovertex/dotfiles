@@ -1,10 +1,22 @@
+local pickers = require('telescope.pickers')
+local config = require('telescope.config').values
+local finders = require('telescope.finders')
 local M = {}
 
-M.show_preview = function()
-    print("Hello from Calendar")
-end
 
-M.show_preview()
+M.show_preview = function(opts)
+    print("Hello from Calendar")
+    pickers.new(opts, {
+        finder = finders.new_table({
+            "yes",
+            "no",
+            "maybe",
+            "perhaps",
+        }),
+        sorter = config.generic_sorter(opts),
+    }):find()
+end
+-- M.show_preview()
 
 return M
 

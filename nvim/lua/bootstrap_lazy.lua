@@ -113,6 +113,9 @@ require("lazy").setup({
                 })
             end,
         },
+        -- Autocompletion for LUA
+        {'hrsh7th/nvim-cmp'},
+	    {'hrsh7th/cmp-nvim-lsp'},
         -- neorg plugin --  2024-09-25 -- Added as potential backend for calendar frontend
         {
             "nvim-neorg/neorg",
@@ -138,4 +141,26 @@ require("lazy").setup({
             end,
         },
     },
+})
+
+
+
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  }),
 })
