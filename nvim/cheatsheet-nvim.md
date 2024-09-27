@@ -2,8 +2,12 @@
 - configure backup of undo history (to prevent loss of buffer content)
 - enable creating new tab (aka new project) with own list of buffers
 - configure how buffers should be handled to prevent data loss (this will take half day probably lol)
+-- quickfix: list all buffers and delete with a keystroke, warn when unwritten content would be lost
 - Navigate Windows by ID instead of using hjkl
 - todo: bind :nmap <Leader>w :write<CR>:source<CR> for development
+- SHIFT + ENTER keybinding
+- insert mode ALT +SHIFT + ] keybinding
+- overwrite pasting with :set paste `p` :set nopaste to keep formatting
 
 
 # Neorg
