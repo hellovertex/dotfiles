@@ -7,32 +7,19 @@ vim.g.maplocalleader = ","
 -- map <F3> :bnext<CR>
 vim.keymap.set('n', '<f2>', ':bprevious<cr>', {noremap=true, silent=true})
 vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
--- -- ################
--- -- PYCHARM KEYMAPS
--- -- ################
--- function DebugKey()
---     local key_sequence = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
---     print("Pressed keys: " .. key_sequence)
---     vim.api.nvim_feedkeys("O", "n", false)
--- --    vim.api.nvim_feedkeys("i", "n", false)
--- --    vim.api.nvim_feedkeys(key_sequence, 'n', false)
--- end
--- 
--- -- vim.api.nvim_set_keymap('i', '<S-CR>', 'lua: DebugKey()<CR>', { noremap = true, silent = true })
--- 
--- -- Map Shift+Enter in insert mode to insert a new line above
--- vim.keymap.set('n', '<S-CR>', function()
---     -- Exit insert mode
---     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
---     -- Insert a new line above and move the cursor to it
---     vim.api.nvim_feedkeys("O", "n", false)
---     -- Return to insert mode
---     vim.api.nvim_feedkeys("i", "n", false)
--- end, { silent = true })
-
 
 -- Check if we are on Windows OS 
 local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+-- ###################
+-- DEVELOPMENT KEYMAPS
+-- ###################
+-- <leader>w -- Write && Source File
+vim.keymap.set('n', '<leader>w', ':write<CR>:source<CR>', {noremap=true, silent=true})
+-- CTRL+L -- Auto Lint file
+-- CTRL+B -- GoTo Defintion
+
+
+
 -- ################
 -- TERMINAL KEYMAPS
 -- ################
@@ -51,7 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
         -- Convert the path to a fully expanded format
         local full_dir = vim.fn.fnamemodify(dir, ':p')
 -- kill current buffer, so that terminal will not be openend in new split
-        vim.cmd('bwipeout')
+--        vim.cmd('bwipeout')
 
         if IS_WINDOWS then
           -- For Windows, use cmd
@@ -73,9 +60,9 @@ end
 -- ################
 -- EXPLORER KEYMAPS
 -- ################
--- Map <Leader>d to open :Vex (netrw) in the current window
+-- Map <Leader>d to open :ex (netrw) in the current window
 --
-vim.keymap.set('n', '<Leader>d', ':Vex<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>d', ':Ex<CR>', { silent = true })
 
 -- Define a function to copy the current directory in netrw to the clipboard
 function CopyNetrwPathToClipboard()
@@ -162,5 +149,28 @@ vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-q>', '<C-v>', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-q>', '<C-v>', { noremap = true })
 
+
+-- -- ################
+-- -- PYCHARM KEYMAPS (FAILED)
+-- -- ################
+-- function DebugKey()
+--     local key_sequence = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+--     print("Pressed keys: " .. key_sequence)
+--     vim.api.nvim_feedkeys("O", "n", false)
+-- --    vim.api.nvim_feedkeys("i", "n", false)
+-- --    vim.api.nvim_feedkeys(key_sequence, 'n', false)
+-- end
+-- 
+-- -- vim.api.nvim_set_keymap('i', '<S-CR>', 'lua: DebugKey()<CR>', { noremap = true, silent = true })
+-- 
+-- -- Map Shift+Enter in insert mode to insert a new line above
+-- vim.keymap.set('n', '<S-CR>', function()
+--     -- Exit insert mode
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+--     -- Insert a new line above and move the cursor to it
+--     vim.api.nvim_feedkeys("O", "n", false)
+--     -- Return to insert mode
+--     vim.api.nvim_feedkeys("i", "n", false)
+-- end, { silent = true })
 
 

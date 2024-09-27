@@ -10,7 +10,8 @@ I want to quickly toggle this frontend to jump between days and have multiple da
 - [ ] Add Linter for Lua
 
 `[ ]` QoL:
-- [ ] Re-Write changelog of dotfiles for the Neovim additions we made
+- [x] When entering netrw using `<leader>d`, do not create a split, instead use same buf
+- [x] Re-Write changelog of dotfiles for the Neovim additions we made
 - [ ] configure backup of undo history (to prevent loss of buffer content)
 - [ ] Navigate Windows by ID instead of using hjkl
 - [ ] enable creating new tab (aka new project) with own list of buffers
