@@ -1,11 +1,16 @@
 # WORK IN PROGRESS
-:
+
 # Todos
 Main: (reason why we use this garbage in the first place)
 Ascii calendar frontend for directory, where each file corresponds to a day.
 I want to quickly toggle this frontend to jump between days and have multiple days side-by-side
 
+`[ ]` Set up Lua Development, so that we can program our calendar plugin
+- [ ] Bind CTRL+B to GoTo Defintion (via LSP)
+- [ ] Add Linter for Lua
 
+`[ ]` QoL:
+- [ ] Re-Write changelog of dotfiles for the Neovim additions we made
 - [ ] configure backup of undo history (to prevent loss of buffer content)
 - [ ] Navigate Windows by ID instead of using hjkl
 - [ ] enable creating new tab (aka new project) with own list of buffers
@@ -19,6 +24,19 @@ I want to quickly toggle this frontend to jump between days and have multiple da
 - [x] CTRL + SHIFT + J in insert mode
 - [x] overwrite pasting with :set paste `p` :set nopaste to keep formatting
 
+# Changelog of dotfiles
+- CTRL+V                  -- lua/my_keymaps.lua    -- 2024-09-26
+- SessionManager          -- lua/my_keymaps.lua    -- 2024-09-26
+- <leader>d File-Explorer -- lua/my_keymaps.lua    -- 2024-09-27 
+- <leader>c CpPath        -- lua/my_keymaps.lua    -- 2024-09-27 
+- <leader>t Terminal      -- lua/my_keymaps.lua    -- 2024-09-27 
+Notes: 
+- Cant easily map multiple Keys, like <C-S-j> (Windows OS related?) 
+- Getting weird ShaDa file overwrite errors on exit (Windows OS related?)
+Upcoming: 
+- Setting up Lua Dev 
+- Implementing calendar frontend
+
 # Useful help commands
 :help c_CTRL-R (c is for command mode, CTRL-R paste into {register}) 
 :help key_notation
@@ -28,6 +46,9 @@ I want to quickly toggle this frontend to jump between days and have multiple da
 
 # LSP
 `:LspInfo` shows currently running Language servers
+- lsp.vim.buf.hover()
+- lsp.vim.buf.definition()
+
 
 # Neorg
 % close all .norg buffers (and thereby return to last non-norg position)

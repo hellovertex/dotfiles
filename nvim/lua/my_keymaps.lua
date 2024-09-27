@@ -7,28 +7,28 @@ vim.g.maplocalleader = ","
 -- map <F3> :bnext<CR>
 vim.keymap.set('n', '<f2>', ':bprevious<cr>', {noremap=true, silent=true})
 vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
--- ################
--- PYCHARM KEYMAPS
--- ################
-function DebugKey()
-    local key_sequence = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
-    print("Pressed keys: " .. key_sequence)
-    vim.api.nvim_feedkeys("O", "n", false)
---    vim.api.nvim_feedkeys("i", "n", false)
---    vim.api.nvim_feedkeys(key_sequence, 'n', false)
-end
-
--- vim.api.nvim_set_keymap('i', '<S-CR>', 'lua: DebugKey()<CR>', { noremap = true, silent = true })
-
--- Map Shift+Enter in insert mode to insert a new line above
-vim.keymap.set('n', '<S-CR>', function()
-    -- Exit insert mode
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-    -- Insert a new line above and move the cursor to it
-    vim.api.nvim_feedkeys("O", "n", false)
-    -- Return to insert mode
-    vim.api.nvim_feedkeys("i", "n", false)
-end, { silent = true })
+-- -- ################
+-- -- PYCHARM KEYMAPS
+-- -- ################
+-- function DebugKey()
+--     local key_sequence = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+--     print("Pressed keys: " .. key_sequence)
+--     vim.api.nvim_feedkeys("O", "n", false)
+-- --    vim.api.nvim_feedkeys("i", "n", false)
+-- --    vim.api.nvim_feedkeys(key_sequence, 'n', false)
+-- end
+-- 
+-- -- vim.api.nvim_set_keymap('i', '<S-CR>', 'lua: DebugKey()<CR>', { noremap = true, silent = true })
+-- 
+-- -- Map Shift+Enter in insert mode to insert a new line above
+-- vim.keymap.set('n', '<S-CR>', function()
+--     -- Exit insert mode
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+--     -- Insert a new line above and move the cursor to it
+--     vim.api.nvim_feedkeys("O", "n", false)
+--     -- Return to insert mode
+--     vim.api.nvim_feedkeys("i", "n", false)
+-- end, { silent = true })
 
 
 -- Check if we are on Windows OS 
