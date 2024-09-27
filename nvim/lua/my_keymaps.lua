@@ -1,25 +1,21 @@
--- Set up both the traditional leader (for keymaps) as well as the local leader (for norg files)
 vim.g.mapleader = " " -- <SPACE>
 vim.g.maplocalleader = ","
-
-
--- map <F2> :bprevious<CR>
--- map <F3> :bnext<CR>
-vim.keymap.set('n', '<f2>', ':bprevious<cr>', {noremap=true, silent=true})
-vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
-
--- Check if we are on Windows OS 
 local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+
+
+-- ###################
+-- CALENDER && JOURNAL
+-- ###################
+vim.keymap.set('n', '<leader>j', ':Neorg journal custom<CR>', {noremap=true, silent=true})
+vim.keymap.set('n', '<leader>ni', ':Neorg index<CR>', {noremap=true, silent=true})
+
 -- ###################
 -- DEVELOPMENT KEYMAPS
 -- ###################
--- <leader>w -- Write && Source File
 vim.keymap.set('n', '<leader>w', ':write<CR>:source<CR>', {noremap=true, silent=true})
--- <Leader>p -- vim.lsp.buf.format()
 vim.keymap.set('n', '<leader>p', ':lua vim.lsp.buf.format()<CR>', {noremap=true, silent=true})
--- CTRL+B -- GoTo Defintion --> use `gd` in normal mode
-
-
+vim.api.nvim_set_keymap('i', '<S-CR>', '<C-o>o', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-CR>', '<C-o>o', { noremap = true, silent = true })
 
 -- ################
 -- TERMINAL KEYMAPS
@@ -60,15 +56,12 @@ end
 -- ################
 -- EXPLORER KEYMAPS
 -- ################
--- Map <Leader>d to open :ex (netrw) in the current window
---
 vim.keymap.set('n', '<Leader>d', ':Ex<CR>', { silent = true })
 
 -- Define a function to copy the current directory in netrw to the clipboard
 function CopyNetrwPathToClipboard()
   -- Get the current directory from netrw
   local path = vim.fn.expand('%:p:h')
-
   -- Use vim's API to copy to system clipboard
   vim.fn.setreg('+', path)
   -- Close the current buffer after copying
@@ -80,6 +73,11 @@ vim.api.nvim_set_keymap('n', '<Leader>c', ':lua CopyNetrwPathToClipboard()<CR>',
 -- ################
 -- BUFFERS  KEYMAPS
 -- ################
+-- map <F2> :bprevious<CR>
+-- map <F3> :bnext<CR>
+vim.keymap.set('n', '<f2>', ':bprevious<cr>', {noremap=true, silent=true})
+vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
+
 -- Added default telescope shortcuts -- 2024-09-26 -- Specifically for Telescope buffers
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })

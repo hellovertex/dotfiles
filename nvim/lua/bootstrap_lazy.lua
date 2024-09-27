@@ -27,7 +27,7 @@ require("lazy").setup({
             config = function()
                 local actions = require "telescope.actions"
                 require("telescope").setup {
-                    pickers = {
+                    pickers = { 
                         buffers = {
                             mappings = {
                                 i = {

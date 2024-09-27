@@ -10,7 +10,8 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 :: when `<leader>j` was pressed, select a date or hit RET for current date
 :: press `<leader>ni` to return to Neorg index
 :: in Neorg index, you can preview all previous norg files using a custom picker on `<leader>np`
-- [ ] <leader>j to toggle calender view (journal)
+- [x] `<leader>j` to toggle calender view (journal)
+- [x] `<leader>ni` to return to index
 - [ ] On opening a norg file, add a link to it to the index.norg if it does not exist
 - [ ] enable norg file preview in index file
 
@@ -20,6 +21,8 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 - [x] Add Linter for Lua
 
 `[ ]` QoL:
+- [ ] Remap CTRL+W + '+' to '+'
+- [ ] Remap CTRL+< to < (use this: https://vim.fandom.com/wiki/Fast_window_resizing_with_plus/minus_keys)
 - [x] When entering netrw using `<leader>d`, do not create a split, instead use same buf
 - [x] Re-Write changelog of dotfiles for the Neovim additions we made
 - [ ] configure backup of undo history (to prevent loss of buffer content)
