@@ -15,8 +15,9 @@ local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
 -- ###################
 -- <leader>w -- Write && Source File
 vim.keymap.set('n', '<leader>w', ':write<CR>:source<CR>', {noremap=true, silent=true})
--- CTRL+L -- Auto Lint file
--- CTRL+B -- GoTo Defintion
+-- <Leader>p -- vim.lsp.buf.format()
+vim.keymap.set('n', '<leader>p', ':lua vim.lsp.buf.format()<CR>', {noremap=true, silent=true})
+-- CTRL+B -- GoTo Defintion --> use `gd` in normal mode
 
 
 
@@ -47,7 +48,6 @@ vim.api.nvim_create_autocmd("FileType", {
           -- For Unix-like systems, use $SHELL or bash
           vim.cmd('terminal cd ' .. vim.fn.shellescape(full_dir) .. ' && $SHELL')
         end
-        
       end,
     })
   end,

@@ -6,6 +6,7 @@ Ascii calendar frontend for directory, where each file corresponds to a day.
 I want to quickly toggle this frontend to jump between days and have multiple days side-by-side
 
 `[ ]` Set up Lua Development, so that we can program our calendar plugin
+- [ ] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
 - [ ] Bind CTRL+B to GoTo Defintion (via LSP)
 - [ ] Add Linter for Lua
 
@@ -13,9 +14,8 @@ I want to quickly toggle this frontend to jump between days and have multiple da
 - [x] When entering netrw using `<leader>d`, do not create a split, instead use same buf
 - [x] Re-Write changelog of dotfiles for the Neovim additions we made
 - [ ] configure backup of undo history (to prevent loss of buffer content)
-- [ ] Navigate Windows by ID instead of using hjkl
 - [ ] enable creating new tab (aka new project) with own list of buffers
-- [ ] bind :nmap <Leader>w :write<CR>:source<CR> for development
+- [x] bind :nmap <Leader>w :write<CR>:source<CR> for development
 - [x] configure how buffers should be handled to prevent data loss (this will take half day probably lol)
 -- `[x]` `<c-d>` quickfix: list all buffers and delete with a keystroke, warn when unwritten content would be lost
 - [x] Bind Pycharm keys
@@ -39,6 +39,7 @@ Upcoming:
 - Implementing calendar frontend
 
 # Useful help commands
+`:help vim.lsp.buf` -- to inspect all the language server bindings -- 2024-09-27
 :help c_CTRL-R (c is for command mode, CTRL-R paste into {register}) 
 :help key_notation
 :help buffers
