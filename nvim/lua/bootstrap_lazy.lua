@@ -15,13 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 2024-09-25 Add back relative line numbers with offset after installing neorg 
-vim.cmd("set number")
-vim.cmd("set relativenumber")
-
--- Set up both the traditional leader (for keymaps) as well as the local leader (for norg files)
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -50,7 +43,7 @@ require("lazy").setup({
         require("nvim-treesitter.configs").setup(opts)
       end,
     },
-    -- neorg plugin
+    -- neorg plugin --  2024-09-25 -- Added as potential backend for calendar frontend
     {
       "nvim-neorg/neorg",
       lazy = false,

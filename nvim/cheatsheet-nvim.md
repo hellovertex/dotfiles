@@ -8,7 +8,8 @@
 - CTRL+V                 -- lua/my_keymaps.lua    -- 2024-09-26
 - SessionManager         -- lua/my_hooks.lua      -- 2024-09-26
 
-
+# Lua - Development utils
+:nmap <Leader>w :write<CR>:source<CR>
 
 # Neorg
 % close all .norg buffers (and thereby return to last non-norg position)
