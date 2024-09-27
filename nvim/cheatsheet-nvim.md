@@ -1,22 +1,37 @@
+# WORK IN PROGRESS
+:
 # Todos
-- configure backup of undo history (to prevent loss of buffer content)
-- enable creating new tab (aka new project) with own list of buffers
-- configure how buffers should be handled to prevent data loss (this will take half day probably lol)
--- quickfix: list all buffers and delete with a keystroke, warn when unwritten content would be lost
-- Navigate Windows by ID instead of using hjkl
-- todo: bind :nmap <Leader>w :write<CR>:source<CR> for development
-- SHIFT + ENTER keybinding
-- insert mode ALT +SHIFT + ] keybinding
-- overwrite pasting with :set paste `p` :set nopaste to keep formatting
+Main: (reason why we use this garbage in the first place)
+Ascii calendar frontend for directory, where each file corresponds to a day.
+I want to quickly toggle this frontend to jump between days and have multiple days side-by-side
 
+
+- [ ] configure backup of undo history (to prevent loss of buffer content)
+- [ ] Navigate Windows by ID instead of using hjkl
+- [ ] enable creating new tab (aka new project) with own list of buffers
+- [ ] bind :nmap <Leader>w :write<CR>:source<CR> for development
+- [x] configure how buffers should be handled to prevent data loss (this will take half day probably lol)
+-- `[x]` `<c-d>` quickfix: list all buffers and delete with a keystroke, warn when unwritten content would be lost
+- [x] Bind Pycharm keys
+:: Does not work under windows, see my_keymaps.PYCHARM_KEYS
+- [x] SHIFT + ENTER keybinding
+- [x] insert mode ALT +SHIFT + ] keybinding
+- [x] CTRL + SHIFT + J in insert mode
+- [x] overwrite pasting with :set paste `p` :set nopaste to keep formatting
+
+# Useful help commands
+:help c_CTRL-R (c is for command mode, CTRL-R paste into {register}) 
+:help key_notation
+:help buffers
+:help registers
+
+
+# LSP
+`:LspInfo` shows currently running Language servers
 
 # Neorg
 % close all .norg buffers (and thereby return to last non-norg position)
 `:Neorg return`
-
-
-# KEYMAPS
-:help c_CTRL-R (c is for command mode, CTRL-R paste into {register}) 
 
 # Multi line indent
 TODO

@@ -5,8 +5,32 @@ vim.g.maplocalleader = ","
 
 -- map <F2> :bprevious<CR>
 -- map <F3> :bnext<CR>
-vim.keymap.set('n', '<F2>', ':bprevious<CR>', {noremap=true, silent=true})
+vim.keymap.set('n', '<f2>', ':bprevious<cr>', {noremap=true, silent=true})
 vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
+-- ################
+-- PYCHARM KEYMAPS
+-- ################
+function DebugKey()
+    local key_sequence = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+    print("Pressed keys: " .. key_sequence)
+    vim.api.nvim_feedkeys("O", "n", false)
+--    vim.api.nvim_feedkeys("i", "n", false)
+--    vim.api.nvim_feedkeys(key_sequence, 'n', false)
+end
+
+-- vim.api.nvim_set_keymap('i', '<S-CR>', 'lua: DebugKey()<CR>', { noremap = true, silent = true })
+
+-- Map Shift+Enter in insert mode to insert a new line above
+vim.keymap.set('n', '<S-CR>', function()
+    -- Exit insert mode
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+    -- Insert a new line above and move the cursor to it
+    vim.api.nvim_feedkeys("O", "n", false)
+    -- Return to insert mode
+    vim.api.nvim_feedkeys("i", "n", false)
+end, { silent = true })
+
+
 -- Check if we are on Windows OS 
 local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
 -- ################
@@ -84,7 +108,7 @@ function DeleteAllTerminalBuffers()
     end
 end
 
-function WriteAllBuffer()
+function WriteAllBuffers()
   -- Get a list of all buffers
   local buffers = vim.api.nvim_list_bufs()
 
@@ -94,8 +118,16 @@ function WriteAllBuffer()
     if vim.api.nvim_buf_is_loaded(buf)
       and vim.api.nvim_buf_get_option(buf, "modifiable")
       and vim.api.nvim_buf_get_option(buf, "buftype") == "" then
-      -- Write the buffer
-      vim.api.nvim_buf_call(buf, function() vim.cmd("write") end)
+
+      -- Check if the buffer has a file name
+      local bufname = vim.api.nvim_buf_get_name(buf)
+      if bufname == "" then
+        -- Skip the buffer if it has no name
+        print("Buffer has no name, skipping...")
+      else
+        -- Write the buffer
+        vim.api.nvim_buf_call(buf, function() vim.cmd("write") end)
+      end
     end
   end
 end
@@ -106,7 +138,7 @@ end
 vim.api.nvim_create_user_command('Wqa', function()
     
     DeleteAllTerminalBuffers()
-    WriteAllBuffer()
+    WriteAllBuffers()
     vim.cmd("mksession! last-session.vim")
     vim.cmd("confirm wqa")
 end, {})

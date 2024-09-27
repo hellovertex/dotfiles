@@ -22,7 +22,21 @@ require("lazy").setup({
     -- added to create directories from within neovim
     {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
-      dependencies = { 'nvim-lua/plenary.nvim' }
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      config = function()
+        local actions = require "telescope.actions"
+        require("telescope").setup {
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+        }
+      }
+    }
+  }
+}
+      end
     },
     -- gui theme
     {
@@ -83,6 +97,21 @@ require("lazy").setup({
            }
         end
     },
+    -- mason to handle LSP server installation -- 2024-09-27 
+{
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+    end,
+},
     -- neorg plugin --  2024-09-25 -- Added as potential backend for calendar frontend
     {
       "nvim-neorg/neorg",
