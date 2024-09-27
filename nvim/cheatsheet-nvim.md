@@ -3,18 +3,19 @@
 # Todos
 Main: (reason why we use this garbage in the first place)
 Ascii calendar frontend for directory, where each file corresponds to a day.
-I want to quickly toggle this frontend to jump between days and have multiple days side-by-side
+I want to quickly toggle this frontend to ju:wmp between days and have multiple days side-by-side
+`[ ]` Set up calendar frontend for journal
+- [ ] <leader>j to toggle calender view (journal)
 
-`[ ]` Set up Lua Development, so that we can program our calendar plugin
-- [ ] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
-- [ ] Bind CTRL+B to GoTo Defintion (via LSP)
-- [ ] Add Linter for Lua
+`[x]` Set up Lua Development, so that we can program our calendar plugin
+- [x] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
+- [x] Bind CTRL+B to GoTo Defintion (via LSP)
+- [x] Add Linter for Lua
 
 `[ ]` QoL:
 - [x] When entering netrw using `<leader>d`, do not create a split, instead use same buf
 - [x] Re-Write changelog of dotfiles for the Neovim additions we made
 - [ ] configure backup of undo history (to prevent loss of buffer content)
-- [ ] enable creating new tab (aka new project) with own list of buffers
 - [x] bind :nmap <Leader>w :write<CR>:source<CR> for development
 - [x] configure how buffers should be handled to prevent data loss (this will take half day probably lol)
 -- `[x]` `<c-d>` quickfix: list all buffers and delete with a keystroke, warn when unwritten content would be lost
@@ -27,16 +28,19 @@ I want to quickly toggle this frontend to jump between days and have multiple da
 
 # Changelog of dotfiles
 - CTRL+V                  -- lua/my_keymaps.lua    -- 2024-09-26
+:: some sane system clipboard defaults for pasting
 - SessionManager          -- lua/my_keymaps.lua    -- 2024-09-26
+:: hitting :wqa triggers functions `DeleteAllTerminals` and `WriteAllBuffers` and creates `last-session.vim`
 - <leader>d File-Explorer -- lua/my_keymaps.lua    -- 2024-09-27 
+:: Opens filepath of current file in netrw
 - <leader>c CpPath        -- lua/my_keymaps.lua    -- 2024-09-27 
+:: Copies the filepath that netrw is currently in and closes netrw buffer going back to previous buf
 - <leader>t Terminal      -- lua/my_keymaps.lua    -- 2024-09-27 
+:: from within netrw, launch a terminal in current filepath in the same buffer
+
 Notes: 
 - Cant easily map multiple Keys, like <C-S-j> (Windows OS related?) 
 - Getting weird ShaDa file overwrite errors on exit (Windows OS related?)
-Upcoming: 
-- Setting up Lua Dev 
-- Implementing calendar frontend
 
 # Useful help commands
 `:help vim.lsp.buf` -- to inspect all the language server bindings -- 2024-09-27
