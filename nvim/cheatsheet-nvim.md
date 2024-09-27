@@ -1,11 +1,18 @@
 # WORK IN PROGRESS
 
 # Todos
-Main: (reason why we use this garbage in the first place)
+Main: (reason why we use this shiet in the first place)
 Ascii calendar frontend for directory, where each file corresponds to a day.
 I want to quickly toggle this frontend to ju:wmp between days and have multiple days side-by-side
+
 `[ ]` Set up calendar frontend for journal
+:: On starting neovim, decide between last-session.vim and calendear.ui (`<leader>s`, `<leader>j`)
+:: when `<leader>j` was pressed, select a date or hit RET for current date
+:: press `<leader>ni` to return to Neorg index
+:: in Neorg index, you can preview all previous norg files using a custom picker on `<leader>np`
 - [ ] <leader>j to toggle calender view (journal)
+- [ ] On opening a norg file, add a link to it to the index.norg if it does not exist
+- [ ] enable norg file preview in index file
 
 `[x]` Set up Lua Development, so that we can program our calendar plugin
 - [x] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
@@ -59,6 +66,12 @@ Notes:
 # Neorg
 % close all .norg buffers (and thereby return to last non-norg position)
 `:Neorg return`
+`:Neorg toggle-concealer`
+Link relative to workspace calendar {:$calendar/journal/2024/10/10.norg:}[2024-10-10]
+- Insert date via <LocalLeader>id (,id)
+- M-CR open selected item in vertical split
+- `F` fixes incorrect link names (consider it like autocompletion)
+
 
 # Multi line indent
 TODO

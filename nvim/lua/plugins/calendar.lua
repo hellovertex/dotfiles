@@ -1,3 +1,5 @@
+-- local cal = require("neorg.core")
+-- vim.print(cal)
 -- Idea: Create file `lazy/nvim-treesitter-textobjects/queries/calendar/textobjects.scm`
 --  so that we can use our calendar as treesitter textobjects with all the perks
 --  and then do something like 
