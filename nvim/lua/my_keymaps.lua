@@ -2,6 +2,40 @@
 vim.g.mapleader = " " -- <SPACE>
 vim.g.maplocalleader = ","
 
+-- Check if we are on Windows OS 
+local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+
+-- Set keymap to trigger terminal in netrw
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  callback = function()
+    -- Define the keymap for <leader>t in netrw buffers
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>t', '', {
+      noremap = true,
+      silent = true,
+      callback = function()
+        -- Get the current directory in netrw
+        local dir = vim.fn.expand('%:p:h')
+        -- Convert the path to a fully expanded format
+        local full_dir = vim.fn.fnamemodify(dir, ':p')
+
+        if IS_WINDOWS then
+          -- For Windows, use cmd
+          vim.cmd('terminal cd /d ' .. vim.fn.shellescape(full_dir) .. ' && cmd')
+        else
+          -- For Unix-like systems, use $SHELL or bash
+          vim.cmd('terminal cd ' .. vim.fn.shellescape(full_dir) .. ' && $SHELL')
+        end
+      end,
+    })
+  end,
+})
+
+-- When in terminal mode under windows, make sure clicking ESC brings us to normal mode
+if IS_WINDOWS then
+   vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+end
+
 -- Map <Leader>d to open :Vex (netrw) in the current window
 vim.keymap.set('n', '<Leader>d', ':Vex<CR>', { silent = true })
 
