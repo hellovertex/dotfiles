@@ -2,11 +2,19 @@
 vim.g.mapleader = " " -- <SPACE>
 vim.g.maplocalleader = ","
 
+
+-- map <F2> :bprevious<CR>
+-- map <F3> :bnext<CR>
+vim.keymap.set('n', '<F2>', ':bprevious<CR>', {noremap=true, silent=true})
+vim.keymap.set('n', '<F3>', ':bnext<CR>', {noremap=true, silent=true})
 -- Check if we are on Windows OS 
 local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
-
+-- ################
+-- TERMINAL KEYMAPS
+-- ################
 -- Set keymap to trigger terminal in netrw
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", { 
+  -- dynamically create keymap when in netrw
   pattern = "netrw",
   callback = function()
     -- Define the keymap for <leader>t in netrw buffers
@@ -18,6 +26,8 @@ vim.api.nvim_create_autocmd("FileType", {
         local dir = vim.fn.expand('%:p:h')
         -- Convert the path to a fully expanded format
         local full_dir = vim.fn.fnamemodify(dir, ':p')
+-- kill current buffer, so that terminal will not be openend in new split
+        vim.cmd('bwipeout')
 
         if IS_WINDOWS then
           -- For Windows, use cmd
@@ -26,6 +36,7 @@ vim.api.nvim_create_autocmd("FileType", {
           -- For Unix-like systems, use $SHELL or bash
           vim.cmd('terminal cd ' .. vim.fn.shellescape(full_dir) .. ' && $SHELL')
         end
+        
       end,
     })
   end,
@@ -35,8 +46,11 @@ vim.api.nvim_create_autocmd("FileType", {
 if IS_WINDOWS then
    vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 end
-
+-- ################
+-- EXPLORER KEYMAPS
+-- ################
 -- Map <Leader>d to open :Vex (netrw) in the current window
+--
 vim.keymap.set('n', '<Leader>d', ':Vex<CR>', { silent = true })
 
 -- Define a function to copy the current directory in netrw to the clipboard
@@ -47,18 +61,52 @@ function CopyNetrwPathToClipboard()
   -- Use vim's API to copy to system clipboard
   vim.fn.setreg('+', path)
   -- Close the current buffer after copying
-  vim.cmd('bwipeout')
+  vim.cmd('bwipeout!')
   vim.notify('Copied: ' .. path)
 end
 vim.api.nvim_set_keymap('n', '<Leader>c', ':lua CopyNetrwPathToClipboard()<CR>', { noremap = true, silent = true })
 
+-- ################
+-- BUFFERS  KEYMAPS
+-- ################
 -- Added default telescope shortcuts -- 2024-09-26 -- Specifically for Telescope buffers
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+-- Upon exiting neovim, we can use this to not bother with errors on typing :wqa due to open terminals
+function DeleteAllTerminalBuffers()
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_get_option(bufnr, 'buftype') == 'terminal' then
+        vim.api.nvim_buf_delete(bufnr, { force = true })
+      end
+    end
+end
 
+
+-- ##################
+-- SESSION MANAGEMENT
+-- ##################
+-- Remap :wqa to save session and then quit
+vim.api.nvim_create_user_command('Wqa', function()
+    
+    DeleteAllTerminalBuffers()
+
+    vim.cmd("mksession! last-session.vim")
+    vim.cmd("confirm wqa")
+end, {})
+
+-- Optionally, remap :wqa itself to :Wqa
+vim.cmd [[
+  cabbrev wqa Wqa
+]]
+
+
+
+-- ################
+-- DEFAULT KEYMAPS
+-- ################
 -- Remap Ctrl+V to paste
 vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-v>', '<C-r>+', { noremap = true })
@@ -68,17 +116,5 @@ vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-q>', '<C-v>', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-q>', '<C-v>', { noremap = true })
 
--- Remap :wqa to save session and then quit
-vim.api.nvim_create_user_command('Wqa', function()
-    vim.cmd("mksession! last-session.vim")
-    -- todo: this will fail if a process is still running
-    -- in this case, not exiting is correct, but pls print a specific err msg
-    vim.cmd("wqa")
-end, {})
-
--- Optionally, remap :wqa itself to :Wqa
-vim.cmd [[
-  cabbrev wqa Wqa
-]]
 
 
