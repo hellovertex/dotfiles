@@ -84,7 +84,21 @@ function DeleteAllTerminalBuffers()
     end
 end
 
+function WriteAllBuffer()
+  -- Get a list of all buffers
+  local buffers = vim.api.nvim_list_bufs()
 
+  -- Iterate over each buffer
+  for _, buf in ipairs(buffers) do
+    -- Check if the buffer is loaded, modifiable, and has no special 'buftype'
+    if vim.api.nvim_buf_is_loaded(buf)
+      and vim.api.nvim_buf_get_option(buf, "modifiable")
+      and vim.api.nvim_buf_get_option(buf, "buftype") == "" then
+      -- Write the buffer
+      vim.api.nvim_buf_call(buf, function() vim.cmd("write") end)
+    end
+  end
+end
 -- ##################
 -- SESSION MANAGEMENT
 -- ##################
@@ -92,7 +106,7 @@ end
 vim.api.nvim_create_user_command('Wqa', function()
     
     DeleteAllTerminalBuffers()
-
+    WriteAllBuffer()
     vim.cmd("mksession! last-session.vim")
     vim.cmd("confirm wqa")
 end, {})
@@ -102,7 +116,7 @@ vim.cmd [[
   cabbrev wqa Wqa
 ]]
 
-
+vim.api.nvim_set_keymap('n', '<leader>s', ':source last-session.vim<CR>', { noremap = true, silent = true })
 
 -- ################
 -- DEFAULT KEYMAPS

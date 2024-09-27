@@ -1,6 +1,8 @@
 # Todos
-- Navigate Windows by ID instead of using hjkl
 - configure backup of undo history (to prevent loss of buffer content)
+- enable creating new tab (aka new project) with own list of buffers
+- configure how buffers should be handled to prevent data loss (this will take half day probably lol)
+- Navigate Windows by ID instead of using hjkl
 - todo: bind :nmap <Leader>w :write<CR>:source<CR> for development
 
 
