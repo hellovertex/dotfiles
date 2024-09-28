@@ -2,6 +2,8 @@ local pickers = require('telescope.pickers')
 local config = require('telescope.config').values
 local previewers = require('telescope.previewers')
 local finders = require('telescope.finders')
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
 local utils = require('telescope.previewers.utils')
 local Path = require('plenary.path')
 local M = {}
@@ -20,6 +22,30 @@ end
 
 local log = require('plenary.log'):new()
 log.level = 'debug'
+-- Function to open a file in a buffer, creating a new one if needed
+function OpenFileInBuffer(filepath)
+    -- Get the absolute path for comparison
+    local abs_path = vim.fn.fnamemodify(filepath, ":p")
+    -- On Windows, replace forward slashes with backslashes for Neovim's 'edit' command
+    if vim.loop.os_uname().version:match("Windows") then
+        abs_path = abs_path:gsub("/", "\\")
+        log.debug("New ABS PATH IS: ", abs_path)
+    end
+    -- Iterate over all listed buffers
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) then
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            bufname = bufname:gsub("/", "\\")
+            if vim.fn.fnamemodify(bufname, ":p") == abs_path then
+                -- Buffer with the file is already open, switch to it
+                vim.api.nvim_set_current_buf(buf)
+                return
+            end
+        end
+    end
+    -- If no buffer is found, open the file in a new buffer
+    vim.api.nvim_command('edit ' .. abs_path)
+end
 
 M.show_preview = function(opts)
     print("Hello from Calendar")
@@ -37,6 +63,7 @@ M.show_preview = function(opts)
                 local filepath = calender_dir .. sanitized_value
                 log.debug("Filepath: " .. filepath)
                 return {
+                    -- TODO: use telescope.actions to open the correct file when pressing RET in the previewer
                     value = Path:new(filepath),
                     display = filepath,
                     ordinal = filepath,
@@ -70,6 +97,16 @@ M.show_preview = function(opts)
                 --utils.highlighter(self.state.bufnr, "markdown")
             end,
         }),
+        attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+                local selection = action_state.get_selected_entry()
+                log.debug("Selected: ", selection.display)
+                -- TODO: open selection.display in buffer
+                OpenFileInBuffer(selection.display)
+            end
+            )
+            return true
+        end
     }):find()
 end
 
