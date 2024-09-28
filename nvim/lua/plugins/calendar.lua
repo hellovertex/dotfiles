@@ -8,65 +8,72 @@ local M = {}
 local calender_dir = 'C:\\Users\\hellovertex\\calendar'
 -- This function extracts the journal links from index.norg
 local function extract_journal_links()
-	local links = {}
-	local index_file = Path:new(calender_dir .. '\\index.norg'):read()
+    local links = {}
+    local index_file = Path:new(calender_dir .. '\\index.norg'):read()
 
-	for link in index_file:gmatch('{:%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg:}') do
-		table.insert(links, link:match('{:(%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg):}'))
-	end
+    for link in index_file:gmatch('{:%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg:}') do
+        table.insert(links, link:match('{:(%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg):}'))
+    end
 
-	return links
+    return links
 end
 
 local log = require('plenary.log'):new()
 log.level = 'debug'
 
 M.show_preview = function(opts)
-	print("Hello from Calendar")
-	local links = extract_journal_links()
-	pickers.new(opts, {
-		finder = finders.new_table({
-			results = links,
-			entry_maker = function(entry)
-				-- parsed format is /journal/YYYY/MM/dd.norg
-				local parsed = vim.split(entry, "calendar")[2]
-				return {
-					value = parsed,
-					display = parsed,
-					ordinal = parsed,
-				}
-			end
-		}),
-		sorter = config.generic_sorter(opts),
-		previewer = previewers.new_buffer_previewer({
-			title = "Journal Entry",
-			define_preview = function(self, entry)
-				local sanitized_value = entry.value:gsub("^%s*(.-)%s*$", "%1")
-				local filepath = Path:new(calender_dir, sanitized_value)
-				local filecontent = filepath:read()
-				log.debug(filecontent)
-				vim.api.nvim_buf_set_lines(
-					self.state.bufnr,
-					0,
-					0,
-					true,
-					vim.tbl_flatten({
-						-- "**Hello**",
-						-- "Everyone",
-						-- "",
-						-- "```lua",
-						--                        vim.split(vim.inspect(entry.value), "\n"),
-						vim.split(vim.inspect(filecontent), "\n"),
-						-- "```",
-					})
-				)
-				--utils.highlighter(self.state.bufnr, "markdown")
-			end,
-		}),
-	}):find()
+    print("Hello from Calendar")
+    local links = extract_journal_links()
+    pickers.new(opts, {
+        finder = finders.new_table({
+            results = links,
+            entry_maker = function(entry)
+                -- parsed format is /journal/YYYY/MM/dd.norg
+                log.debug("Entry: " .. entry)
+                local parsed = vim.split(entry, "calendar")[2]
+                log.debug("Parsed: " .. parsed)
+                local sanitized_value = parsed:gsub("^%s*(.-)%s*$", "%1")
+                log.debug("Sanitized: " .. sanitized_value)
+                local filepath = calender_dir .. sanitized_value
+                log.debug("Filepath: " .. filepath)
+                return {
+                    value = Path:new(filepath),
+                    display = filepath,
+                    ordinal = filepath,
+                }
+            end
+        }),
+        sorter = config.generic_sorter(opts),
+        previewer = previewers.new_buffer_previewer({
+            title = "Journal Entry",
+            define_preview = function(self, entry)
+                --                local sanitized_value = entry.value:gsub("^%s*(.-)%s*$", "%1")
+                --                local filepath = Path:new(calender_dir, sanitized_value)
+                log.debug("Entry2: " .. vim.inspect(entry))
+                local filecontent = entry.value:read()
+                log.debug(filecontent)
+                vim.api.nvim_buf_set_lines(
+                    self.state.bufnr,
+                    0,
+                    0,
+                    true,
+                    vim.tbl_flatten({
+                        -- "**Hello**",
+                        -- "Everyone",
+                        -- "",
+                        -- "```lua",
+                        --                        vim.split(vim.inspect(entry.value), "\n"),
+                        vim.split(vim.inspect(filecontent), "\n"),
+                        -- "```",
+                    })
+                )
+                --utils.highlighter(self.state.bufnr, "markdown")
+            end,
+        }),
+    }):find()
 end
 
--- M.show_preview()
+M.show_preview()
 
 return M
 
