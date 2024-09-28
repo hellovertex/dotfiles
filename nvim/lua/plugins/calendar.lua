@@ -1,21 +1,67 @@
 local pickers = require('telescope.pickers')
 local config = require('telescope.config').values
+local previewers = require('telescope.previewers')
 local finders = require('telescope.finders')
+local utils = require('telescope.previewers.utils')
+-- local jumper = require('telescope.builtin').jumplist{} 
+
 local M = {}
 
+-- M.hello = function()
+--     print(jumper)
+-- end
+
+--M.hello() 
+
+
+local log = require('plenary.log'):new()
+log.level = 'debug'
 
 M.show_preview = function(opts)
     print("Hello from Calendar")
     pickers.new(opts, {
-        finder = finders.new_table({
-            "yes",
-            "no",
-            "maybe",
-            "perhaps",
+        finder = finders.new_async_job({
+            -- results = {
+            --     { name = "no",      value = { 1, 2, 3 } },
+            --     { name = "maybe",   value = { 2, 3, 4 } },
+            --     { name = "perhaps", value = { 3, 4, 5 } },
+            -- },
+            command_generator = function()
+                return {"git"}
+            end,
+            entry_maker = function(entry)
+                log.debug(entry)
+                return {
+                    value = entry.value,
+                    display = entry.name,
+                    ordinal = entry.name,
+                }
+            end
         }),
         sorter = config.generic_sorter(opts),
+        previewer = previewers.new_buffer_previewer({
+            title = "Journal Entry",
+            define_preview = function(self, entry)
+                vim.api.nvim_buf_set_lines(
+                    self.state.bufnr, 
+                    0, 
+                    0, 
+                    true,
+                    vim.tbl_flatten({
+                        "**Hello**",
+                        "Everyone",
+                        "",
+                        "```lua",
+                        vim.split(vim.inspect(entry.value), "\n"),
+                        "```",
+                    })
+                )
+                utils.highlighter(self.state.bufnr, "markdown")
+            end,
+        }),
     }):find()
 end
+
 -- M.show_preview()
 
 return M
