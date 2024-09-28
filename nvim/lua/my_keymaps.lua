@@ -141,6 +141,13 @@ vim.api.nvim_set_keymap('n', '<leader>s', ':source last-session.vim<CR>', { nore
 -- ################
 -- DEFAULT KEYMAPS
 -- ################
+
+-- Zoom in
+vim.api.nvim_set_keymap('n', '<C-+>', ':lua vim.api.nvim_command("set guifont+=h1")<CR>', { noremap = true, silent = true })
+
+-- Zoom out
+vim.api.nvim_set_keymap('n', '<C-->', ':lua vim.api.nvim_command("set guifont-=h1")<CR>', { noremap = true, silent = true })
+
 -- Remap Ctrl+V to paste
 vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-v>', '<C-r>+', { noremap = true })

@@ -164,3 +164,5 @@ cmp.setup({
     { name = 'nvim_lsp' },
   }),
 })
+
+vim.cmd('set guifont=Consolas:h12')

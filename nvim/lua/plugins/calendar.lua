@@ -63,7 +63,6 @@ M.show_preview = function(opts)
                 local filepath = calender_dir .. sanitized_value
                 log.debug("Filepath: " .. filepath)
                 return {
-                    -- TODO: use telescope.actions to open the correct file when pressing RET in the previewer
                     value = Path:new(filepath),
                     display = filepath,
                     ordinal = filepath,
@@ -78,7 +77,9 @@ M.show_preview = function(opts)
                 --                local filepath = Path:new(calender_dir, sanitized_value)
                 log.debug("Entry2: " .. vim.inspect(entry))
                 local filecontent = entry.value:read()
-                log.debug(filecontent)
+                log.debug("FILECONTENT: ", filecontent)
+                -- Replace all occurrences of carriage return with an empty string
+                filecontent = filecontent:gsub("\r", "")
                 vim.api.nvim_buf_set_lines(
                     self.state.bufnr,
                     0,
@@ -88,13 +89,13 @@ M.show_preview = function(opts)
                         -- "**Hello**",
                         -- "Everyone",
                         -- "",
-                        -- "```lua",
+                        "```markdown",
                         --                        vim.split(vim.inspect(entry.value), "\n"),
-                        vim.split(vim.inspect(filecontent), "\n"),
-                        -- "```",
+                        vim.split(filecontent, "\n"),
+                        "```",
                     })
                 )
-                --utils.highlighter(self.state.bufnr, "markdown")
+                utils.highlighter(self.state.bufnr, "markdown")
             end,
         }),
         attach_mappings = function(prompt_bufnr)
