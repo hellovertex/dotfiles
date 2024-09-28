@@ -44,7 +44,7 @@ function OpenFileInBuffer(filepath)
         end
     end
     -- If no buffer is found, open the file in a new buffer
-    vim.api.nvim_command('edit ' .. abs_path)
+    vim.api.nvim_command('edit ' .. tostring(abs_path))
 end
 
 M.show_preview = function(opts)
@@ -101,7 +101,8 @@ M.show_preview = function(opts)
             actions.select_default:replace(function()
                 local selection = action_state.get_selected_entry()
                 log.debug("Selected: ", selection.display)
-                -- TODO: open selection.display in buffer
+                -- TODO: fix open selection.display in buffer
+                actions.close(prompt_bufnr)
                 OpenFileInBuffer(selection.display)
             end
             )
@@ -110,7 +111,7 @@ M.show_preview = function(opts)
     }):find()
 end
 
-M.show_preview()
+-- M.show_preview()
 
 return M
 
