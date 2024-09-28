@@ -3,63 +3,67 @@ local config = require('telescope.config').values
 local previewers = require('telescope.previewers')
 local finders = require('telescope.finders')
 local utils = require('telescope.previewers.utils')
--- local jumper = require('telescope.builtin').jumplist{} 
-
+local Path = require('plenary.path')
 local M = {}
+local calender_dir = 'C:\\Users\\hellovertex\\calendar'
+-- This function extracts the journal links from index.norg
+local function extract_journal_links()
+	local links = {}
+	local index_file = Path:new(calender_dir .. '\\index.norg'):read()
 
--- M.hello = function()
---     print(jumper)
--- end
+	for link in index_file:gmatch('{:%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg:}') do
+		table.insert(links, link:match('{:(%$calendar/journal/[0-9]+/[0-9]+/[0-9]+%.norg):}'))
+	end
 
---M.hello() 
-
+	return links
+end
 
 local log = require('plenary.log'):new()
 log.level = 'debug'
 
 M.show_preview = function(opts)
-    print("Hello from Calendar")
-    pickers.new(opts, {
-        finder = finders.new_async_job({
-            -- results = {
-            --     { name = "no",      value = { 1, 2, 3 } },
-            --     { name = "maybe",   value = { 2, 3, 4 } },
-            --     { name = "perhaps", value = { 3, 4, 5 } },
-            -- },
-            command_generator = function()
-                return {"git"}
-            end,
-            entry_maker = function(entry)
-                log.debug(entry)
-                return {
-                    value = entry.value,
-                    display = entry.name,
-                    ordinal = entry.name,
-                }
-            end
-        }),
-        sorter = config.generic_sorter(opts),
-        previewer = previewers.new_buffer_previewer({
-            title = "Journal Entry",
-            define_preview = function(self, entry)
-                vim.api.nvim_buf_set_lines(
-                    self.state.bufnr, 
-                    0, 
-                    0, 
-                    true,
-                    vim.tbl_flatten({
-                        "**Hello**",
-                        "Everyone",
-                        "",
-                        "```lua",
-                        vim.split(vim.inspect(entry.value), "\n"),
-                        "```",
-                    })
-                )
-                utils.highlighter(self.state.bufnr, "markdown")
-            end,
-        }),
-    }):find()
+	print("Hello from Calendar")
+	local links = extract_journal_links()
+	pickers.new(opts, {
+		finder = finders.new_table({
+			results = links,
+			entry_maker = function(entry)
+				-- parsed format is /journal/YYYY/MM/dd.norg
+				local parsed = vim.split(entry, "calendar")[2]
+				return {
+					value = parsed,
+					display = parsed,
+					ordinal = parsed,
+				}
+			end
+		}),
+		sorter = config.generic_sorter(opts),
+		previewer = previewers.new_buffer_previewer({
+			title = "Journal Entry",
+			define_preview = function(self, entry)
+				local sanitized_value = entry.value:gsub("^%s*(.-)%s*$", "%1")
+				local filepath = Path:new(calender_dir, sanitized_value)
+				local filecontent = filepath:read()
+				log.debug(filecontent)
+				vim.api.nvim_buf_set_lines(
+					self.state.bufnr,
+					0,
+					0,
+					true,
+					vim.tbl_flatten({
+						-- "**Hello**",
+						-- "Everyone",
+						-- "",
+						-- "```lua",
+						--                        vim.split(vim.inspect(entry.value), "\n"),
+						vim.split(vim.inspect(filecontent), "\n"),
+						-- "```",
+					})
+				)
+				--utils.highlighter(self.state.bufnr, "markdown")
+			end,
+		}),
+	}):find()
 end
 
 -- M.show_preview()

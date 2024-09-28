@@ -1,5 +1,12 @@
 # WORK IN PROGRESS
-
+# Keymaps implemented yet are:
+- <leader>r`[estore]`  : restore `last-session.vim`
+- <leader>j`[ournal]`  : toggle calendar frontend (uses Neorg journal backend)
+- <leader>p`[rettify]` : prettify (lint) current file
+- <leader>b`[ackup]` : call WriteAllBuffers to flush all bufs to disk
+- <leader>ni[ndex] : Return to Neorg Journal index
+- <leader>np[icker] : Show Neorg journal index picker
+- and some more, see my_keymaps.lua
 # Todos
 Main: (reason why we use this shiet in the first place)
 Ascii calendar frontend for directory, where each file corresponds to a day.
@@ -13,16 +20,17 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 - [x] `<leader>j` to toggle calender view (journal)
 - [x] `<leader>ni` to return to index
 - [ ] On opening a norg file, add a link to it to the index.norg if it does not exist
-- [ ] enable norg file preview in index file
+- [x] enable norg file preview in index file
 
 `[x]` Set up Lua Development, so that we can program our calendar plugin
 - [x] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
 - [x] Bind CTRL+B to GoTo Defintion (via LSP)
 - [x] Add Linter for Lua
-- [ ] Set up autocompletion for Lua
+- [x] Set up autocompletion for Lua
 
 `[ ]` QoL:
 - [ ] Remap CTRL+W + '+' to '+'
+- [x] Bind keymap for WriteAllBuffers --> <leader>b[ackup]
 - [ ] Remap CTRL+< to < (use this: https://vim.fandom.com/wiki/Fast_window_resizing_with_plus/minus_keys)
 - [x] When entering netrw using `<leader>d`, do not create a split, instead use same buf
 - [x] Re-Write changelog of dotfiles for the Neovim additions we made

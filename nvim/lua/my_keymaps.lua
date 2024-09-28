@@ -119,7 +119,7 @@ function WriteAllBuffers()
         end
     end
 end
-
+vim.api.nvim_set_keymap('n', '<leader>b', ':lua WriteAllBuffers()<CR>', {noremap=true})
 -- ##################
 -- SESSION MANAGEMENT
 -- ##################
