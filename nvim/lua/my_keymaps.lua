@@ -52,6 +52,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- HOTKEY to create terminal instance
+-- HOTEY runs `<C-w>s + <Leader>d + <Leader>t + i` that uses <Leader>t defined above
+-- Does not work: vim.keymap.set('n', '<leader>t',  "<C-w>s <leader>d", {noremap=false,silent=false})
 -- When in terminal mode under windows, make sure clicking ESC brings us to normal mode
 if IS_WINDOWS then
     vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
