@@ -12,7 +12,7 @@ Main: (reason why we use this shiet in the first place)
 Ascii calendar frontend for directory, where each file corresponds to a day.
 I want to quickly toggle this frontend to ju:wmp between days and have multiple days side-by-side
 
-`[ ]` Set up calendar frontend for journal
+`[x]` Set up calendar frontend for journal
 :: On starting neovim, decide between last-session.vim and calendear.ui (`<leader>s`, `<leader>j`)
 :: when `<leader>j` was pressed, select a date or hit RET for current date
 :: press `<leader>ni` to return to Neorg index
@@ -21,7 +21,7 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 - [x] `<leader>ni` to return to index
 - [ ] On opening a norg file, add a link to it to the index.norg if it does not exist
 - [x] enable norg file preview in index file
-- [ ] fix journal picker sometimes not opening files
+- [x] fix journal picker sometimes not opening files
 
 `[x]` Set up Lua Development, so that we can program our calendar plugin
 - [x] Set up AutoFormatting for Lua by mapping `:lua vim.lsp.buf.format()`
@@ -101,6 +101,9 @@ CTRL + hjkl : navigate
 CTRL + W + HJKL: full width/height
 CTRL + < > : resize vertically
 CTRL + -+: resize horizontally
+# Tabs
+:tabnew
+gt
 
 # Block comments
 CTRL + Q + Shift i + ESC + ESC

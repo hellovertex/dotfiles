@@ -1,6 +1,16 @@
+-- Keymaps for:
+-----------------------
+-- CALENDER && JOURNAL
+-- DEVELOPMENT
+-- TERMINAL
+-- EXPLORER
+-- BUFFER
+-- SESSION
+
 vim.g.mapleader = " " -- <SPACE>
 vim.g.maplocalleader = ","
 local IS_WINDOWS = vim.loop.os_uname().sysname == "Windows_NT"
+
 -- ###################
 -- CALENDER && JOURNAL
 -- ###################
