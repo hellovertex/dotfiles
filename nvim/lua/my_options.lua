@@ -2,7 +2,7 @@
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.expandtab = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -15,3 +15,5 @@ vim.opt.termguicolors = true
 -- Set line numbers -- 2024-09-26 -- Added to replace vim.cmd("set number") calls -
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.g.netrw_altv = 1 -- change from left splitting to right
+-- vim.g.netrw_liststyle = 3 -- treestyle view in netrw
