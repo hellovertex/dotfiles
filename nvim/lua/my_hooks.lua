@@ -1,6 +1,3 @@
--- TODO: add a hook when a file has been opened, check if it was a .norg file, and if yes,
--- then go to the index file of the calender workspace, and try to create a link under YY MM for dd.norg
---
 local M = {}
 
 M.preview = function()
@@ -51,7 +48,7 @@ function populate_template(template_path, substitutions)
 
       -- Insert the modified template into the buffer
       vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(template, "\n"))
-      vim.cmd("write")
+      --vim.cmd("write")
     end
   end
 end
@@ -63,8 +60,26 @@ function insert_norg_template()
   local target_dir = vim.fn.expand("~/calendar/journal")
   if filepath:sub(1, #target_dir) == target_dir then
     vim.cmd("Neorg toggle-concealer")
+    -- Pattern to capture the last two subdirectories (year/month) and the filename (day)
+    local year, month, day = filepath:match(".*\\(%d+)\\(%d+)\\(%d+)%.norg")
+    -- Convert the extracted year, month, and day to a Lua table for the date
+    local date_table = {
+      year = tonumber(year),
+      month = tonumber(month),
+      day = tonumber(day)
+    }
+
+    -- Use os.time to convert the date table into a timestamp
+    local timestamp = os.time(date_table)
+
+    -- Get the weekday abbreviation using os.date
+    local weekday_abbr = os.date("%a", timestamp) -- %a gives the abbreviated weekday name
+
+    -- Format the final datestring with the weekday abbreviation
+    local datestring = string.format("%s-%s-%s (%s)", year, month, day, weekday_abbr)
     local substitutions = {
-      ["{{TODAY}}"] = os.date("%Y-%m-%d")
+      -- todo: how in lua, do we get 2024-10-10 from filepath 2024/10/10.norg
+      ["{{TODAY}}"] = datestring -- os.date("%Y-%m-%d")
     }
     if is_buffer_empty() then
       populate_template(norg_template_path, substitutions)
@@ -72,9 +87,8 @@ function insert_norg_template()
   end
 end
 
--- vim.api.nvim_create_autocmd("filetype", {
---   pattern = "norg",
---   callback = insert_norg_template
--- })
-print(vim.bo.buftype)
+vim.api.nvim_create_autocmd("filetype", {
+  pattern = "norg",
+  callback = insert_norg_template
+})
 return M

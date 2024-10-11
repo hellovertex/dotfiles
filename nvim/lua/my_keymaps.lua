@@ -131,6 +131,10 @@ vim.api.nvim_create_autocmd("filetype", {
 -- map <F3> :bnext<CR>
 vim.keymap.set('n', '<f2>', ':bprevious<cr>', { noremap = true, silent = true })
 vim.keymap.set('n', '<F3>', ':bnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', {noremap=true})
+vim.keymap.set('n', '<C-l>', '<C-w>l', {noremap=true})
+vim.keymap.set('n', '<C-j>', '<C-w>j', {noremap=true})
+vim.keymap.set('n', '<C-k>', '<C-w>k', {noremap=true})
 
 -- Added default telescope shortcuts -- 2024-09-26 -- Specifically for Telescope buffers
 local builtin = require('telescope.builtin')

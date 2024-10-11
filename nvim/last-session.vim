@@ -14,25 +14,22 @@ else
   set shortmess=aoO
 endif
 badd +1 ~/calendar/index.norg
-badd +150 ~/AppData/Local/nvim/lua/my_keymaps.lua
+badd +123 ~/AppData/Local/nvim/lua/my_keymaps.lua
 badd +1 ~/AppData/Local/nvim/lua/hellovertex.lua
 badd +15 ~/AppData/Local/nvim/cheatsheet-nvim.md
 badd +23 ~/AppData/Local/nvim/lua/plugins/calendar.lua
-badd +1 ~/AppData/Local/nvim/lua/my_hooks.lua
+badd +72 ~/AppData/Local/nvim/lua/my_hooks.lua
 badd +1 ~/AppData/Local/nvim/lua/my_telescope.lua
 badd +24 ~/AppData/Local/nvim/lua/bootstrap_lazy.lua
 badd +1 ~/AppData/Local/nvim/init.lua
 badd +19 ~/AppData/Local/nvim/lua/my_options.lua
 badd +1 ~/calendar/journal/2024/10/15.norg
-badd +1 ~/calendar/journal/2024/10/14.norg
-badd +1 ~/calendar/journal/2024/10/16.norg
-badd +1 ~/AppData/Local/nvim/templates/norg/journal.norg
-badd +4 ~/calendar/journal/2024/10/17.norg
-badd +1 ~/calendar/journal/2024/10/10.norg
-badd +5 ~/calendar/journal/2024/10/11.norg
-badd +4 ~/calendar/journal/2024/10/12.norg
+badd +2 ~/AppData/Local/nvim/templates/norg/journal.norg
+badd +18 ~/calendar/journal/2024/10/10.norg
+badd +1 ~/calendar/journal/2024/10/11.norg
 badd +1 ~/calendar/journal/2024/09/26.norg
-badd +1 NetrwTreeListing
+badd +2 tmp.lua
+badd +1 ~/calendar/journal/2024/10/13.norg
 argglobal
 %argdel
 set stal=2
@@ -43,8 +40,12 @@ let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
+split
+1wincmd k
+wincmd _ | wincmd |
 vsplit
 1wincmd h
+wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
@@ -55,9 +56,13 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+exe '1resize ' . ((&lines * 23 + 25) / 51)
+exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
+exe '2resize ' . ((&lines * 23 + 25) / 51)
+exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
+exe '3resize ' . ((&lines * 24 + 25) / 51)
 argglobal
+balt ~/calendar/journal/2024/10/10.norg
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -68,40 +73,67 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 27 - ((23 * winheight(0) + 24) / 48)
+let s:l = 33 - ((11 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 27
-normal! 02|
+keepjumps 33
+normal! 03|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/calendar/journal/2024/10/10.norg", ":p")) | buffer ~/calendar/journal/2024/10/10.norg | else | edit ~/calendar/journal/2024/10/10.norg | endif
+if bufexists(fnamemodify("~/calendar/journal/2024/10/11.norg", ":p")) | buffer ~/calendar/journal/2024/10/11.norg | else | edit ~/calendar/journal/2024/10/11.norg | endif
 if &buftype ==# 'terminal'
-  silent file ~/calendar/journal/2024/10/10.norg
+  silent file ~/calendar/journal/2024/10/11.norg
 endif
-balt C:/Program\ Files/Neovim/bin/NetrwTreeListing
-setlocal fdm=expr
-setlocal fde=v:lua.vim.treesitter.foldexpr()
+balt ~/calendar/index.norg
+setlocal fdm=manual
+setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
 setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-1
-normal! zo
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 6 - ((5 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 6
+normal! 07|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+argglobal
+if bufexists(fnamemodify("~/AppData/Local/nvim/templates/norg/journal.norg", ":p")) | buffer ~/AppData/Local/nvim/templates/norg/journal.norg | else | edit ~/AppData/Local/nvim/templates/norg/journal.norg | endif
+if &buftype ==# 'terminal'
+  silent file ~/AppData/Local/nvim/templates/norg/journal.norg
+endif
+balt ~/calendar/index.norg
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 2 - ((1 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 2
+normal! 09|
+lcd C:/Program\ Files/Neovim/bin
+wincmd w
+exe '1resize ' . ((&lines * 23 + 25) / 51)
+exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
+exe '2resize ' . ((&lines * 23 + 25) / 51)
+exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
+exe '3resize ' . ((&lines * 24 + 25) / 51)
 tabnext
 edit ~/AppData/Local/nvim/lua/my_hooks.lua
 let s:save_splitbelow = &splitbelow
@@ -120,9 +152,10 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 argglobal
+balt C:/Program\ Files/Neovim/bin/tmp.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -133,20 +166,20 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 75 - ((42 * winheight(0) + 24) / 48)
+let s:l = 85 - ((35 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 75
-normal! 0
+keepjumps 85
+normal! 033|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/AppData/Local/nvim/lua/my_options.lua", ":p")) | buffer ~/AppData/Local/nvim/lua/my_options.lua | else | edit ~/AppData/Local/nvim/lua/my_options.lua | endif
+if bufexists(fnamemodify("C:/Program\ Files/Neovim/bin/tmp.lua", ":p")) | buffer C:/Program\ Files/Neovim/bin/tmp.lua | else | edit C:/Program\ Files/Neovim/bin/tmp.lua | endif
 if &buftype ==# 'terminal'
-  silent file ~/AppData/Local/nvim/lua/my_options.lua
+  silent file C:/Program\ Files/Neovim/bin/tmp.lua
 endif
-balt ~/AppData/Local/nvim/lua/my_keymaps.lua
+balt ~/calendar/journal/2024/10/13.norg
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -157,17 +190,16 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 19 - ((18 * winheight(0) + 24) / 48)
+let s:l = 2 - ((1 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 19
-normal! 03|
+keepjumps 2
+normal! 025|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabnext 2
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
