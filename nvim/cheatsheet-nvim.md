@@ -19,7 +19,7 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 :: in Neorg index, you can preview all previous norg files using a custom picker on `<leader>np`
 - [x] `<leader>j` to toggle calender view (journal)
 - [x] `<leader>ni` to return to index
-- [ ] On opening a norg file, add a link to it to the index.norg if it does not exist
+- [x] On opening a norg file, add a link to it to the index.norg if it does not exist
 - [x] enable norg file preview in index file
 - [x] fix journal picker sometimes not opening files
 
@@ -61,6 +61,7 @@ I want to quickly toggle this frontend to ju:wmp between days and have multiple 
 Notes: 
 - Cant easily map multiple Keys, like <C-S-j> (Windows OS related?) 
 - Getting weird ShaDa file overwrite errors on exit (Windows OS related?)
+- zooming fonts does not work using CTRL + '+'
 
 # Useful help commands
 `:help vim.lsp.buf` -- to inspect all the language server bindings -- 2024-09-27

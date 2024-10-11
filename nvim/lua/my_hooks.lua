@@ -1,3 +1,5 @@
+local norg_template_path = vim.fn.expand("~/AppData/Local/nvim/templates/norg/journal.norg")
+
 local M = {}
 
 M.preview = function()
@@ -53,7 +55,6 @@ function populate_template(template_path, substitutions)
   end
 end
 
-local norg_template_path = vim.fn.expand("~/AppData/Local/nvim/templates/norg/journal.norg")
 function insert_norg_template()
   -- Read template file and replace all variables with their values using lua
   local filepath = vim.fn.expand("%:p")
@@ -83,6 +84,22 @@ function insert_norg_template()
     }
     if is_buffer_empty() then
       populate_template(norg_template_path, substitutions)
+      -- goto index.norg and at the very bottom append reflink
+      local reflink = string.format("- {:$calendar/journal/%s/%s/%s.norg:}[%s-%s-%s]", year, month, day, year, month, day)
+      local file = io.open("C:\\Users\\hellovertex\\calendar\\index.norg", "a")
+      if file then
+        -- Attempt to write to the file
+        local success, writeErr = file:write(reflink)
+
+        if not success then
+          print("Error writing to file: " .. writeErr) -- Print error if writing fails
+        else
+          file:flush()                               -- Ensure the data is written immediately
+          file:close()                               -- Always close the file after writing
+          vim.cmd("checktime")
+          print("Text appended successfully!")
+        end
+      end
     end
   end
 end
