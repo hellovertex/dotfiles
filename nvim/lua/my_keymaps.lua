@@ -16,6 +16,7 @@ if IS_WINDOWS then
 else
   last_session = "~/.config/nvim/last-session.vim"
 end
+vim.cmd("set belloff=all")
 
 -- ###################
 -- CALENDER && JOURNAL

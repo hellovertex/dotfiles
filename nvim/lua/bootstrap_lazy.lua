@@ -143,6 +143,7 @@ require("lazy").setup({
       -- https://github.com/pysan3/neorg-templates
       -- BUT OFC does not work under windows
       dependencies = { "pysan3/neorg-templates", dependencies = { "L3MON4D3/LuaSnip" } }, -- ADD THIS LINE
+
     },
   },
 })

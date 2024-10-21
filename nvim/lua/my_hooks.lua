@@ -85,7 +85,7 @@ function insert_norg_template()
     if is_buffer_empty() then
       populate_template(norg_template_path, substitutions)
       -- goto index.norg and at the very bottom append reflink
-      local reflink = string.format("- {:$calendar/journal/%s/%s/%s.norg:}[%s-%s-%s]", year, month, day, year, month, day)
+      local reflink = string.format("- {:$calendar/journal/%s/%s/%s.norg:}[%s-%s-%s]\n", year, month, day, year, month, day)
       local file = io.open("C:\\Users\\hellovertex\\calendar\\index.norg", "a")
       if file then
         -- Attempt to write to the file
