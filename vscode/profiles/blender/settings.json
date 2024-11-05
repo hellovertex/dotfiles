@@ -1,0 +1,23 @@
+{
+    "terminal.integrated.env.windows": { "PYTHONPATH": "${workspaceFolder}" },
+    "glsllint.additionalStageAssociations": {},
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "blender.executables": [
+        {
+            "path": "C:\\Program Files\\Blender Foundation\\Blender 4.2\\blender.exe",
+            "name": "",
+            "isDebug": false
+        }
+    ],
+    "blender.addon.reloadOnSave": true,
+    "workbench.colorTheme": "JetBrains New UI Dark Theme",
+
+	// Use key mappings from a `.vimrc` file.
+	"vim.vimrc.enable": true,
+
+	// Path to a Vim configuration file. If unset, it will check for `$HOME/.vscodevimrc`, `$HOME/.vimrc`, `$HOME/_vimrc`, and `$HOME/.config/nvim/init.vim`, in that order.
+    "vim.vimrc.path": "",
+    "editor.minimap.enabled": false,
+}
