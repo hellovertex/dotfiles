@@ -129,7 +129,7 @@ require("lazy").setup({
             ["core.dirman"] = {
               config = {
                 workspaces = {
-                  calendar = "~/calendar",
+                  calendar = "C:\\Users\\hellovertex\\Documents\\github.com\\hellovertex\\journal",
                 },
                 default_workspace = "calendar",
               },
