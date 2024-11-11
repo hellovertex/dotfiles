@@ -58,7 +58,7 @@ end
 function insert_norg_template()
   -- Read template file and replace all variables with their values using lua
   local filepath = vim.fn.expand("%:p")
-  local target_dir = vim.fn.expand("~/calendar/journal")
+  local target_dir = vim.fn.expand("C:\\Users\\hellovertex\\Documents\\github.com\\hellovertex\\journal\\journal")
   if filepath:sub(1, #target_dir) == target_dir then
     vim.cmd("Neorg toggle-concealer")
     -- Pattern to capture the last two subdirectories (year/month) and the filename (day)
@@ -85,8 +85,8 @@ function insert_norg_template()
     if is_buffer_empty() then
       populate_template(norg_template_path, substitutions)
       -- goto index.norg and at the very bottom append reflink
-      local reflink = string.format("- {:$calendar/journal/%s/%s/%s.norg:}[%s-%s-%s]\n", year, month, day, year, month, day)
-      local file = io.open("C:\\Users\\hellovertex\\calendar\\index.norg", "a")
+      local reflink = string.format("- {:$journal/journal/%s/%s/%s.norg:}[%s-%s-%s]\n", year, month, day, year, month, day)
+      local file = io.open("C:\\Users\\hellovertex\\Documents\\github.com\\hellovertex\\journal\\index.norg", "a")
       if file then
         -- Attempt to write to the file
         local success, writeErr = file:write(reflink)

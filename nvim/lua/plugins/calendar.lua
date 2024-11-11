@@ -7,7 +7,7 @@ local action_state = require('telescope.actions.state')
 local utils = require('telescope.previewers.utils')
 local Path = require('plenary.path')
 local M = {}
-local calender_dir = 'C:\\Users\\hellovertex\\calendar'
+local calender_dir = 'C:\\Users\\hellovertex\\Documents\\github.com\\hellovertex\\journal'
 -- This function extracts the journal links from index.norg
 local function extract_journal_links()
     local links = {}

@@ -17,8 +17,8 @@ badd +36 ~/calendar/index.norg
 badd +222 ~/AppData/Local/nvim/lua/my_keymaps.lua
 badd +1 ~/AppData/Local/nvim/lua/hellovertex.lua
 badd +1 ~/AppData/Local/nvim/cheatsheet-nvim.md
-badd +83 ~/AppData/Local/nvim/lua/plugins/calendar.lua
-badd +40 ~/AppData/Local/nvim/lua/my_hooks.lua
+badd +23 ~/AppData/Local/nvim/lua/plugins/calendar.lua
+badd +111 ~/AppData/Local/nvim/lua/my_hooks.lua
 badd +1 ~/AppData/Local/nvim/lua/my_telescope.lua
 badd +148 ~/AppData/Local/nvim/lua/bootstrap_lazy.lua
 badd +1 ~/AppData/Local/nvim/init.lua
@@ -28,7 +28,7 @@ badd +2 ~/AppData/Local/nvim/templates/norg/journal.norg
 badd +18 ~/calendar/journal/2024/10/10.norg
 badd +10 ~/calendar/journal/2024/10/11.norg
 badd +1 ~/calendar/journal/2024/09/26.norg
-badd +14 tmp.lua
+badd +22 tmp.lua
 badd +10 ~/calendar/journal/2024/10/12.norg
 badd +10 ~/calendar/journal/2024/10/16.norg
 badd +3 ~/calendar/journal/2024/10/13.norg
@@ -50,9 +50,14 @@ badd +4 ~/calendar/journal/2024/10/24.norg
 badd +6 ~/calendar/journal/2024/10/29.norg
 badd +4 ~/calendar/journal/2024/11/06.norg
 badd +4 ~/calendar/journal/2024/11/07.norg
-badd +5 ~/Documents/github.com/hellovertex/journal/journal/2024/11/07.norg
+badd +10 ~/Documents/github.com/hellovertex/journal/journal/2024/11/07.norg
 badd +1 ~/Documents/github.com/hellovertex/journal/index.norg
-badd +1 ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/10.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/09.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg
+badd +5 ~/Documents/github.com/hellovertex/journal/journal/2024/11/12.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/13.norg
 argglobal
 %argdel
 set stal=2
@@ -75,8 +80,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 105 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 88 + 97) / 194)
 argglobal
 balt ~/calendar/index.norg
 setlocal fdm=expr
@@ -87,20 +92,24 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 24 - ((23 * winheight(0) + 24) / 48)
+20
+normal! zo
+24
+normal! zo
+let s:l = 35 - ((23 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 24
-normal! 09|
+keepjumps 35
+normal! 04|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg", ":p")) | buffer ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg | else | edit ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg | endif
+if bufexists(fnamemodify("~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg", ":p")) | buffer ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg | else | edit ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg | endif
 if &buftype ==# 'terminal'
-  silent file ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg
+  silent file ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg
 endif
-balt ~/Documents/github.com/hellovertex/journal/index.norg
+balt ~/Documents/github.com/hellovertex/journal/journal/2024/11/13.norg
 setlocal fdm=expr
 setlocal fde=v:lua.vim.treesitter.foldexpr()
 setlocal fmr={{{,}}}
@@ -109,16 +118,19 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 3 - ((2 * winheight(0) + 24) / 48)
+1
+normal! zo
+let s:l = 4 - ((3 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 3
-normal! 0
+keepjumps 4
+normal! 079|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 105 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 88 + 97) / 194)
 tabnext
 edit ~/AppData/Local/nvim/cheatsheet-nvim.md
 let s:save_splitbelow = &splitbelow
@@ -140,30 +152,6 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 argglobal
-balt ~/AppData/Local/nvim/lua/my_keymaps.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 110 - ((32 * winheight(0) + 24) / 48)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 110
-normal! 030|
-lcd C:/Program\ Files/Neovim/bin
-wincmd w
-argglobal
-if bufexists(fnamemodify("C:/Program\ Files/Neovim/bin/tmp.lua", ":p")) | buffer C:/Program\ Files/Neovim/bin/tmp.lua | else | edit C:/Program\ Files/Neovim/bin/tmp.lua | endif
-if &buftype ==# 'terminal'
-  silent file C:/Program\ Files/Neovim/bin/tmp.lua
-endif
 balt ~/AppData/Local/nvim/lua/my_hooks.lua
 setlocal fdm=manual
 setlocal fde=0
@@ -175,12 +163,41 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 14 - ((13 * winheight(0) + 24) / 48)
+let s:l = 68 - ((23 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 14
-normal! 028|
+keepjumps 68
+normal! 059|
+lcd C:/Program\ Files/Neovim/bin
+wincmd w
+argglobal
+if bufexists(fnamemodify("~/AppData/Local/nvim/lua/bootstrap_lazy.lua", ":p")) | buffer ~/AppData/Local/nvim/lua/bootstrap_lazy.lua | else | edit ~/AppData/Local/nvim/lua/bootstrap_lazy.lua | endif
+if &buftype ==# 'terminal'
+  silent file ~/AppData/Local/nvim/lua/bootstrap_lazy.lua
+endif
+balt C:/Program\ Files/Neovim/bin/tmp.lua
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 133 - ((23 * winheight(0) + 24) / 48)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 133
+let s:c = 17 - ((0 * winwidth(0) + 48) / 97)
+if s:c > 0
+  exe 'normal! ' . s:c . '|zs' . 17 . '|'
+else
+  normal! 017|
+endif
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
 exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
