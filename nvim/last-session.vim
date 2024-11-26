@@ -55,9 +55,14 @@ badd +1 ~/Documents/github.com/hellovertex/journal/index.norg
 badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/08.norg
 badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/10.norg
 badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/09.norg
-badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg
+badd +4 ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg
 badd +5 ~/Documents/github.com/hellovertex/journal/journal/2024/11/12.norg
-badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/13.norg
+badd +6 ~/Documents/github.com/hellovertex/journal/journal/2024/11/13.norg
+badd +4 ~/Documents/github.com/hellovertex/journal/journal/2024/11/21.norg
+badd +5 ~/Documents/github.com/hellovertex/journal/journal/2024/11/22.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/24.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/26.norg
+badd +3 ~/Documents/github.com/hellovertex/journal/journal/2024/11/25.norg
 argglobal
 %argdel
 set stal=2
@@ -92,24 +97,24 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-20
+1
 normal! zo
-24
+23
 normal! zo
-let s:l = 35 - ((23 * winheight(0) + 24) / 48)
+let s:l = 41 - ((23 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 35
-normal! 04|
+keepjumps 41
+normal! 066|
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg", ":p")) | buffer ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg | else | edit ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg | endif
+if bufexists(fnamemodify("~/Documents/github.com/hellovertex/journal/journal/2024/11/26.norg", ":p")) | buffer ~/Documents/github.com/hellovertex/journal/journal/2024/11/26.norg | else | edit ~/Documents/github.com/hellovertex/journal/journal/2024/11/26.norg | endif
 if &buftype ==# 'terminal'
-  silent file ~/Documents/github.com/hellovertex/journal/journal/2024/11/11.norg
+  silent file ~/Documents/github.com/hellovertex/journal/journal/2024/11/26.norg
 endif
-balt ~/Documents/github.com/hellovertex/journal/journal/2024/11/13.norg
+balt ~/Documents/github.com/hellovertex/journal/journal/2024/11/25.norg
 setlocal fdm=expr
 setlocal fde=v:lua.vim.treesitter.foldexpr()
 setlocal fmr={{{,}}}
@@ -120,15 +125,19 @@ setlocal fdn=20
 setlocal fen
 1
 normal! zo
-let s:l = 4 - ((3 * winheight(0) + 24) / 48)
+let s:l = 6 - ((5 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 079|
+keepjumps 6
+let s:c = 46 - ((43 * winwidth(0) + 44) / 88)
+if s:c > 0
+  exe 'normal! ' . s:c . '|zs' . 46 . '|'
+else
+  normal! 046|
+endif
 lcd C:/Program\ Files/Neovim/bin
 wincmd w
-2wincmd w
 exe 'vert 1resize ' . ((&columns * 105 + 97) / 194)
 exe 'vert 2resize ' . ((&columns * 88 + 97) / 194)
 tabnext
